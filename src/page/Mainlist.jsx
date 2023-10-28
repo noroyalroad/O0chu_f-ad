@@ -16,7 +16,6 @@ const Action = ({ genres }) => {
       .then((res) => {
         setaction(res.data);
         setLoading(false);
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);

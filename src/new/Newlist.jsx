@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import Gettotalstar from "../detail/Gettotalstar";
@@ -8,8 +8,9 @@ function Newlist({ movie, id }) {
   const [load, setloda] = useState(true);
   const nav = useNavigate();
 
+  const kindWrapRef = useRef(null);
   const [showPrev, setShowPrev] = useState(false);
-  const [showNext, setShowNext] = useState(true); // 초기값을 true로 설정
+  const [showNext, setShowNext] = useState(true);
   const [translate, setTranslate] = useState(0);
   const [currentIdx, setCurrentIdx] = useState(0);
 
@@ -18,57 +19,27 @@ function Newlist({ movie, id }) {
     setloda(false);
   }, [movie]);
 
-  useEffect(() => {
-    const kindWrap = document.querySelector(".kind_wrap");
-    const slider = kindWrap ? kindWrap.querySelector(".slider") : null;
-    const slideLis = slider ? slider.querySelectorAll("li") : [];
-    const prevButton = document.querySelector(".arrow .prev");
-    const nextButton = document.querySelector(".arrow .next");
+  function moveSlide(event, direction) {
+    event.preventDefault();
+    let newTranslate = translate;
+    const liWidth = 232;
+    const gap = 20;
+    const moveDistance = liWidth + gap;
 
-    if (kindWrap && slider && slideLis.length > 0) {
-      const liWidth = 232;
-      const gap = 20;
-      const moveDistance = liWidth + gap;
-      const sliderWidth = liWidth * slideLis.length + gap * (slideLis.length - 1);
-      slider.style.width = `${sliderWidth}px`;
-
-      function moveSlide(event) {
-        event.preventDefault();
-        let newTranslate = translate;
-
-        if (event.target.className === "next" && currentIdx < slideLis.length - 5) {
-          newTranslate -= moveDistance;
-          setCurrentIdx((prevIdx) => prevIdx + 1);
-          setShowPrev(true);
-          setShowNext(currentIdx + 1 < slideLis.length - 5);
-        } else if (event.target.className === "prev" && currentIdx > 0) {
-          newTranslate += moveDistance;
-          setCurrentIdx((prevIdx) => prevIdx - 1);
-          setShowPrev(currentIdx - 1 > 0);
-          setShowNext(true);
-        }
-        setTranslate(newTranslate);
-        slider.style.transform = `translateX(${newTranslate}px)`;
-      }
-
-      if (prevButton) {
-        prevButton.addEventListener("click", moveSlide);
-      }
-
-      if (nextButton) {
-        nextButton.addEventListener("click", moveSlide);
-      }
-
-      return () => {
-        if (prevButton) {
-          prevButton.removeEventListener("click", moveSlide);
-        }
-        if (nextButton) {
-          nextButton.removeEventListener("click", moveSlide);
-        }
-      };
+    if (direction === "next" && currentIdx < newlist.length - 5) {
+      newTranslate -= moveDistance;
+      setCurrentIdx((prevIdx) => prevIdx + 1);
+      setShowPrev(true);
+      setShowNext(currentIdx + 1 < newlist.length - 5);
+    } else if (direction === "prev" && currentIdx > 0) {
+      newTranslate += moveDistance;
+      setCurrentIdx((prevIdx) => prevIdx - 1);
+      setShowPrev(currentIdx - 1 > 0);
+      setShowNext(true);
     }
-  }, [load, translate, currentIdx, newlist.length]);
+
+    setTranslate(newTranslate);
+  }
 
   return (
     <div style={{ position: "relative" }}>
@@ -76,14 +47,14 @@ function Newlist({ movie, id }) {
         <h1>loda...</h1>
       ) : (
         <div style={{ position: "relative" }}>
-          <div className="kind_wrap">
+          <div className="kind_wrap" ref={kindWrapRef}>
             <div className="kind_slider">
-              <ul className="slider">
+              <ul className="slider" style={{ transform: `translateX(${translate}px)` }}>
                 {newlist.map((item, index) => (
                   <li
                     key={index}
                     onClick={() => {
-                      document.location.href = "/detail/" + item.movie_id;
+                      nav(`/detail/${item.movie_id}`);
                     }}
                   >
                     <a>
@@ -100,12 +71,12 @@ function Newlist({ movie, id }) {
           </div>
           <div className="arrow">
             {showPrev && (
-              <a href="#" className="prev">
+              <a href="#" className="prev" onClick={(e) => moveSlide(e, "prev")}>
                 &lt;
               </a>
             )}
             {showNext && (
-              <a href="#" className="next">
+              <a href="#" className="next" onClick={(e) => moveSlide(e, "next")}>
                 &gt;
               </a>
             )}
