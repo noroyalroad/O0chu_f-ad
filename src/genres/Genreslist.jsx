@@ -12,7 +12,9 @@ const Genreslist = () => {
   return (
     <div>
       <Header />
-      <h5 className="cateTitle marT_20">{genres}</h5>
+      <div className="mo_dis_block">
+        <h5 className="cateTitle marT_20">{genres}</h5>
+      </div>
       <Genresitem gen={genres} />
       <div className="scroll-to-div">
         <ScrollToQuestion />

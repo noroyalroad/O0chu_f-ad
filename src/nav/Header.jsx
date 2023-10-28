@@ -52,16 +52,6 @@ function Header() {
   }, []);
 
   useEffect(() => {
-    // const token = Cookies.get("token"); // 수정: get 메서드 사용
-
-    // console.log("쿠키에 설정된 토큰:", token);
-
-    // if (token !== undefined) {
-    //   // 수정: undefined를 확인
-    //   setIsLoggedIn(true);
-    // } else {
-    //   setIsLoggedIn(false);
-    // }
     if (user !== undefined && user.userData && user.userData.isAuth) {
       setNickname(user.userData.nickname);
       setRole(user.userData.role);
@@ -157,7 +147,7 @@ function Header() {
                           nav(`/mypage`);
                         }}
                       >
-                        {nickname}
+                        MyPage
                       </DropdownItem>
                     )}
                     {role === "1" && <DropdownItem onClick={handleMovieAddClick}>영화추가</DropdownItem>}

@@ -1017,6 +1017,12 @@ body {
   font-size: 50px;
   /* 다른 스타일 속성 추가 */
 }
+
+.mo_dis_block {
+  width: 100%;
+  padding: 0 20px;
+  display: none;
+}
 @media (max-width: 767px) {
   .webSize {
     width: 100%;
@@ -1111,6 +1117,9 @@ body {
   }
   .passBox form input {
     font-size: 20px;
+  }
+  .mo_dis_block {
+    display: block;
   }
 }
 
