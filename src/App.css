@@ -1058,14 +1058,14 @@ body {
     float: none;
   }
   .kind_wrap > .kind_slider .slider li a {
-    height: 500px;
+    height: 300px;
   }
 
   .listBox {
     grid-template-columns: 1fr 1fr;
   }
   .item {
-    height: 500px;
+    height: 300px;
   }
 
   .dropdown button {
@@ -1118,8 +1118,9 @@ body {
   .passBox form input {
     font-size: 20px;
   }
-  .mo_dis_block {
-    display: block;
+  .modar iframe {
+    width: 90%;
+    height: 50%;
   }
 }
 
