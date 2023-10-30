@@ -17,9 +17,26 @@ import { useNavigate } from "react-router-dom";
 // import OcheMovie from "./OchuMovie";
 
 function List() {
+  // 장르 선택
+  const [selectedGenre, setSelectedGenre] = useState("오영추");
+
+  // 장르 클릭 핸들러
+  const handleGenreClick = (genre) => {
+    document.location.href = `/movies/list/${genre}?genre=${genre}`;
+  };
+
   const user = useSelector((state) => state.user);
   const [nickname, setNickname] = useState("");
   const nav = useNavigate();
+
+  // 컴포넌트 마운트 시 쿼리 파라미터로부터 장르 읽기
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const genreFromQuery = urlParams.get("genre");
+    if (genreFromQuery) {
+      setSelectedGenre(genreFromQuery);
+    }
+  }, []);
 
   useEffect(() => {
     if (user !== undefined && user.userData !== undefined) {
@@ -40,7 +57,8 @@ function List() {
           <h5 className="cateTitle">액션</h5>{" "}
           <button
             onClick={() => {
-              window.location.href = "/movies/list/액션";
+              handleGenreClick("액션");
+              // window.location.href = "/movies/list/액션";
             }}
           >
             +more
@@ -52,7 +70,8 @@ function List() {
           <h5 className="cateTitle">애니메이션</h5>{" "}
           <button
             onClick={() => {
-              window.location.href = "/movies/list/애니메이션";
+              handleGenreClick("애니메이션");
+              // window.location.href = "/movies/list/애니메이션";
             }}
           >
             +more
@@ -63,7 +82,8 @@ function List() {
           <h5 className="cateTitle">공포 / 스릴러</h5>{" "}
           <button
             onClick={() => {
-              window.location.href = "/movies/list/공포 스릴러";
+              handleGenreClick("공포 스릴러");
+              // window.location.href = "/movies/list/공포 스릴러";
             }}
           >
             +more
@@ -74,7 +94,8 @@ function List() {
           <h5 className="cateTitle">범죄</h5>{" "}
           <button
             onClick={() => {
-              window.location.href = "/movies/list/범죄";
+              handleGenreClick("범죄");
+              // window.location.href = "/movies/list/범죄";
             }}
           >
             +more
@@ -86,7 +107,8 @@ function List() {
           <h5 className="cateTitle">코미디</h5>{" "}
           <button
             onClick={() => {
-              window.location.href = "/movies/list/코미디";
+              handleGenreClick("코미디");
+              // window.location.href = "/movies/list/코미디";
             }}
           >
             +more
@@ -97,7 +119,8 @@ function List() {
           <h5 className="cateTitle">멜로 / 드라마</h5>{" "}
           <button
             onClick={() => {
-              window.location.href = "/movies/list/멜로 드라마";
+              handleGenreClick("멜로 드라마");
+              // window.location.href = "/movies/list/멜로 드라마";
             }}
           >
             +more

@@ -27,16 +27,12 @@ function App() {
       {/* <Roadscroll /> */}
       <Routes>
         <Route path="/" element={<List />}></Route>
-        {/* <Route path="/list/detail/:movie_id" element={<Moviedetail />}></Route> */}
-        {/* <Route path="/list2" element={<MovieList />}></Route> */}
-        {/* <Route path="/title" element={<Title />}></Route> */}
-        {/* <Route path="/fl" element={<Fltest />}></Route> */}
         <Route path="/movies/list/:genres" element={<Genreslist />}></Route>
         <Route path="/movies/list/genres/list" element={<Genreslist />}></Route>
         <Route path="/movies/list/newlsit" element={<NewMovie />}></Route>
         <Route path="/movies/list/serach" element={<Search />}></Route>
         <Route path="/movies/detail" element={<Moviedetailinfo />}></Route>
-        <Route path="/movies/wishlist" element={<Wishlist />}></Route>
+        <Route path="/movies/list/wishlist" element={<Wishlist />}></Route>
         <Route path="/search/research/:search" element={<Searchlist />}></Route>
         <Route path="/login" element={<Sign />}></Route>
         <Route path="/register" element={<SignUp />}></Route>

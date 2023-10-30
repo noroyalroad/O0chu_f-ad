@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandBackFist, faFaceLaugh, faFaceGrimace, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faGun, faTv, faFrog, faStar, faFile, faThumbsUp, faUser, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import MyModal from "../modal/MyModal";
 import axios from "axios";
@@ -26,6 +26,7 @@ function Header() {
     dispath(click(window.scrollY));
     document.location.href = `/movies/list/${genre}?genre=${genre}`;
   };
+  const location = useLocation();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -176,7 +177,7 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav" className="center-collapse">
             <Nav className="center">
               <Nav.Link
-                className={selectedGenre === "오영추" ? "nav-link activeLink" : "nav-link"}
+                className={selectedGenre === "오영추" && !location.pathname.includes("/detail") ? "nav-link activeLink" : "nav-link"}
                 onClick={(event) => {
                   event.preventDefault();
                   dispath(click(window.scrollY));
@@ -187,6 +188,7 @@ function Header() {
                 <FontAwesomeIcon icon={faThumbsUp} activeClassName="onActive" />
                 오영추
               </Nav.Link>
+
               <Nav.Link
                 className={selectedGenre === "액션" ? "nav-link activeLink" : "nav-link"}
                 onClick={(event) => {

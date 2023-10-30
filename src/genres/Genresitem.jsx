@@ -49,7 +49,7 @@ const Genresitem = (props) => {
 
   return (
     <div>
-      <div>{load ? <Loading /> : <Genresitemlist list={list} />}</div>
+      <div>{load ? <Loading /> : <Genresitemlist list={list} genres={gen} />}</div>
       <div className="loadDown">
         <button
           onClick={() => {

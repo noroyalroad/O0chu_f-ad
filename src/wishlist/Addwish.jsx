@@ -5,7 +5,6 @@ import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { api } from "../config/api";
-import { useNavigate } from "react-router-dom";
 
 const Addwish = ({ movie_id }) => {
   const [isSolidStar, setIsSolidStar] = useState(false);
@@ -36,8 +35,6 @@ const Addwish = ({ movie_id }) => {
       }
 
       setIsSolidStar(!isSolidStar);
-
-      console.log("찜 목록: ", isSolidStar);
 
       let body = {
         wish: wish,

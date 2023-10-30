@@ -62,4 +62,4 @@ const Genresitemlist = (props) => {
   );
 };
 
-export default React.memo(Genresitemlist);
+export default Genresitemlist;
