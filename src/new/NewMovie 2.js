@@ -15,7 +15,8 @@ function NewMovie({ movie, id }) {
     axios
       .get(`${api}/api/newList`)
       .then((res) => {
-        const filteredList = res.data.filter((item) => item.delete_yn === 'N');
+        const filteredList = res.data.filter((item) => item.delete_yn === "N");
+        console.log(newlist);
         setnewlist(filteredList);
         setloda(false);
       })

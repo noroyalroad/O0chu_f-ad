@@ -10,6 +10,7 @@ const Suggestion = () => {
   const [load, setload] = useState(true);
 
   const user = useSelector((state) => state.user);
+  console.log(user);
 
   useEffect(() => {
     if (user !== undefined && user.userData !== undefined) {
@@ -29,7 +30,7 @@ const Suggestion = () => {
     }
   }, [user]);
 
-  return <div>{load ? <div className="loadBox">로그인 후 이용 가능한 서비스 입니다.</div> : <Suggestionitem item={list} />}</div>;
+  return <div>{load && !user ? <div className="loadBox">로그인 후 이용 가능한 서비스 입니다.</div> : <Suggestionitem item={list} />}</div>;
 };
 
 export default Suggestion;

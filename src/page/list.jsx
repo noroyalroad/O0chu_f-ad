@@ -29,6 +29,8 @@ function List() {
   const [nickname, setNickname] = useState("");
   const nav = useNavigate();
 
+  const shouldRenderSuggestion = user && user.userData && user.userData.role !== "1";
+
   // 컴포넌트 마운트 시 쿼리 파라미터로부터 장르 읽기
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -48,8 +50,19 @@ function List() {
     <div>
       <Header />
       <div className="listWrap webSize">
-        {user && user.userData && user.userData.isAuth ? <h5 className="cateTitle marT_20">{nickname}님을 위한 영화</h5> : <h5 className="cateTitle marT_20">추천 영화</h5>}
-        <Suggestion />
+        {shouldRenderSuggestion && user && user.userData && user.userData.isAuth ? (
+          <h5 className="cateTitle marT_20">{nickname}님을 위한 영화</h5>
+        ) : user && user.userData && user.userData.role === "1" ? null : (
+          <h5 className="cateTitle marT_20">추천 영화</h5>
+        )}
+
+        {shouldRenderSuggestion && user && user.userData && user.userData.isAuth ? (
+          <Suggestion />
+        ) : !user || !user.userData || !user.userData.isAuth ? (
+          <div className="loadBox">로그인 후 이용 가능한 서비스 입니다.</div>
+        ) : null}
+
+        {shouldRenderSuggestion}
         <h5 className="cateTitle">New</h5>
         <NewMovie></NewMovie>
 

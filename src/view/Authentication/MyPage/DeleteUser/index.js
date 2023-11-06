@@ -43,7 +43,10 @@ export default function DeleteUser() {
         setMessage("현재 비밀번호가 일치하지 않습니다.");
       } else if (responseMessage === "회원 탈퇴 성공") {
         alert("탈퇴가 완료되었습니다, 지금까지 오영추를 이용해주셔서 감사합니다.");
+
         Cookies.remove("token");
+        localStorage.clear();
+        window.location.href = "/";
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         navigate("/");
       }
